@@ -22,3 +22,6 @@ This is a simple incident management application. Users can add, delete, update,
    "body":"body1"
    }
    ````
+
+### Output from jmeter for stress testing
+The report output from jmeter is in the output folder, double click /output/index.html can view it in Apache JMeter Dashboard.
