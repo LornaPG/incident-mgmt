@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.dto.IncidentDto;
+import org.example.exception.NotFoundException;
 import org.example.service.IncidentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,17 +29,17 @@ public class IncidentController {
         return ResponseEntity.ok(service.createIncident(incidentDto));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<IncidentDto> updateIncident(@PathVariable String id, @RequestBody IncidentDto incidentDto) {
+    @PutMapping("/update")
+    public ResponseEntity<IncidentDto> updateIncident(@RequestParam String id, @RequestBody IncidentDto incidentDto) {
         IncidentDto updatedIncident = service.updateIncident(id, incidentDto);
         if (updatedIncident == null) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("No incident found with id " + id);
         }
         return ResponseEntity.ok(updatedIncident);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteIncident(@PathVariable String id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteIncident(@RequestParam String id) {
         service.deleteIncidentById(id);
         return ResponseEntity.noContent().build();
     }

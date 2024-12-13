@@ -2,6 +2,7 @@ package org.example.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.IncidentDto;
+import org.example.exception.NotFoundException;
 import org.example.model.Incident;
 import org.example.repository.IncidentRepository;
 import org.example.service.IncidentService;
@@ -46,8 +47,9 @@ public class IncidentServiceImpl implements IncidentService {
             incident.setTitle(incidentDto.getTitle());
             incident.setBody(incidentDto.getBody());
             repository.save(incident);
+            return incidentDto;
         }
-        return incidentDto;
+        return null;
     }
 
     @Override
